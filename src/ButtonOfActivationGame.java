@@ -12,13 +12,16 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class ButtonOfActivationGame {
 
-    private static final int TOTAL_STEPS = 50;
+    // --- Configuration: Decreased by 1 to reserve the final step for the backdoor ---
+    private static final int TOTAL_STEPS = 50; 
+    private static final int RANDOM_CHALLENGES = TOTAL_STEPS - 1; 
+
     private int stepsRemaining = TOTAL_STEPS;
     private List<Challenge> challengeQueue;
-    private Challenge currentChallenge = null; // <--- FIXED: Explicitly initialized to null
+    private Challenge currentChallenge = null; 
     private Scanner scanner;
     
-    // --- New Data Structure to hold Port Name and Number ---
+    // --- Data Structures ---
     private List<PortInfo> commonPorts;
 
     /**
@@ -36,17 +39,14 @@ public class ButtonOfActivationGame {
 
     public ButtonOfActivationGame() {
         scanner = new Scanner(System.in);
-        initializePortData(); // NEW: Initialize the port list
+        initializePortData();
         initializeChallenges();
     }
     
     // -------------------------------------------------------------------
-    // --- Port Data Initialization ---
+    // --- Port Data Initialization (No Change) ---
     // -------------------------------------------------------------------
     
-    /**
-     * Populates the list of common ports with official IANA data.
-     */
     private void initializePortData() {
         commonPorts = new ArrayList<>();
         
@@ -70,20 +70,38 @@ public class ButtonOfActivationGame {
 
 
     // -------------------------------------------------------------------
-    // --- Challenge Generation ---
+    // --- Challenge Generation (MODIFIED) ---
     // -------------------------------------------------------------------
 
     private void initializeChallenges() {
         challengeQueue = new ArrayList<>();
         
-        for (int i = 0; i < TOTAL_STEPS; i++) {
+        // 1. Generate 49 randomized challenges (RANDOM_CHALLENGES = 49)
+        for (int i = 0; i < RANDOM_CHALLENGES; i++) {
             challengeQueue.add(createRandomChallenge());
         }
 
+        // 2. Shuffle the 49 challenges
         Collections.shuffle(challengeQueue);
+        
+        // 3. Create the final, Port 0 Backdoor challenge
+        String finalName = "System Backdoor Final Access - Port 0 Injection";
+        String finalInstructions = "COMMAND: crack port backdoor 0";
+        String finalRequiredValue = "crack port backdoor 0";
+        
+        Challenge finalBackdoor = new Challenge(
+            finalName, 
+            ChallengeType.PORT_CRACK, // Still a port crack type
+            finalRequiredValue,
+            finalInstructions
+        );
+        
+        // 4. Add the final step as the last item in the queue
+        challengeQueue.add(finalBackdoor);
     }
 
     private Challenge createRandomChallenge() {
+        // This method only creates random challenges, ensuring it never hits the final Port 0 step
         ChallengeType[] types = ChallengeType.values();
         ChallengeType type = types[ThreadLocalRandom.current().nextInt(types.length)];
         
@@ -93,13 +111,10 @@ public class ButtonOfActivationGame {
 
         switch (type) {
             case PORT_CRACK:
-                // --- MODIFIED PORT CRACK LOGIC ---
-                // Randomly select a PortInfo object from our list
                 PortInfo targetPort = commonPorts.get(
                     ThreadLocalRandom.current().nextInt(commonPorts.size())
                 );
                 
-                // Use a short, recognizable port name for the command
                 String shortName = targetPort.name.split(" ")[0].toLowerCase();
                 if (shortName.equals("file")) shortName = "ftp";
                 
@@ -109,7 +124,6 @@ public class ButtonOfActivationGame {
                 break;
                 
             case SEQUENCE_INPUT:
-                // Generate a random sequence of 5-7 numbers
                 StringBuilder sequence = new StringBuilder();
                 int sequenceLength = ThreadLocalRandom.current().nextInt(5, 8);
                 for (int i = 0; i < sequenceLength; i++) {
@@ -125,7 +139,6 @@ public class ButtonOfActivationGame {
                 break;
                 
             case CODE_INPUT:
-                // Generate a random malicious code word
                 String[] codes = {"OVERRIDE", "DECRYPT", "MALFORM", "INITIATE", "BREACH"};
                 String codeWord = codes[ThreadLocalRandom.current().nextInt(codes.length)];
                 
@@ -144,19 +157,19 @@ public class ButtonOfActivationGame {
     }
 
     // -------------------------------------------------------------------
-    // --- Game Loop and Logic (Unchanged) ---
+    // --- Game Loop and Logic (No Change) ---
     // -------------------------------------------------------------------
 
     public void startGame() {
         System.out.println("---------------------------------------------------------");
-        System.out.println("  WELCOME, HENCHMAN Qess. Ω, TO THE BUTTON OF ACTIVATION");
+        System.out.println("  WELCOME, HENCHMAN Qess. Omega, TO THE BUTTON OF ACTIVATION");
         System.out.println("---------------------------------------------------------");
         System.out.println("OBJECTIVE: Complete 50 steps to breach the system and activate the Subgiant Phase.");
         System.out.println("Type 'EXIT' to quit at any time.");
         System.out.println("\n... Initializing Alarm Sequence ...\n");
         
         while (stepsRemaining > 0) {
-            currentChallenge = challengeQueue.remove(0);
+            currentChallenge = challengeQueue.remove(0); 
             
             System.out.println("--- STEP " + (TOTAL_STEPS - stepsRemaining + 1) + " of " + TOTAL_STEPS + " ---");
             System.out.println("STATUS: Alarm Deactivation Steps Remaining: " + stepsRemaining);
@@ -168,17 +181,22 @@ public class ButtonOfActivationGame {
             
             if (input.equalsIgnoreCase("EXIT")) {
                 System.out.println("\nMission aborted. The Sun will wait for your return.");
+                pressEnterToContinue(); // <--- ADDED PAUSE ON EXIT
                 return;
             }
             
             if (checkInput(input)) {
                 System.out.println("\n[SUCCESS] Step Complete. Access Granted.\n");
                 stepsRemaining--;
+                if (stepsRemaining > 0) {
+                    pressEnterToContinue(); // <--- ADDED PAUSE ON SUCCESS (Unless game is won)
+                }
             } else {
                 int randomIndex = ThreadLocalRandom.current().nextInt(challengeQueue.size() + 1);
                 challengeQueue.add(randomIndex, currentChallenge);
                 
-                System.out.println("\n[FAILURE] Invalid Command. System Re-shuffled. Try again, Ω.\n");
+                System.out.println("\n[FAILURE] Invalid Command. System Re-shuffled. Try again, Omega.\n");
+                pressEnterToContinue(); // <--- ADDED PAUSE ON FAILURE
             }
         }
         
@@ -187,7 +205,7 @@ public class ButtonOfActivationGame {
     
     private boolean checkInput(String input) {
         String standardizedInput = input.trim().toLowerCase();
-        String required = currentChallenge.getRequiredValue();
+        String required = currentChallenge.getRequiredValue(); 
         return standardizedInput.equals(required);
     }
 
@@ -196,8 +214,39 @@ public class ButtonOfActivationGame {
         System.out.println("||              SYSTEM BREACH COMPLETE!                ||");
         System.out.println("||  INITIATING SUBGIANT PHASE ACTIVATION SEQUENCE...   ||");
         System.out.println("=========================================================");
-        System.out.println("\nHenchman Qess. Ω, your mission is complete. The Sun is yours.");
+        System.out.println("\nHenchman Qess. Omega, your mission is complete. The Button is ready.");
+
+        // --- NEW: Wait for the final action ---
+        boolean buttonPressed = false;
+        while (!buttonPressed) {
+            System.out.println("\n[FINAL COMMAND] The activation matrix is primed. Execute the final order.");
+            System.out.println("INSTRUCTIONS: Type 'PRESS BUTTON' to begin Subgiant Phase.");
+            System.out.print("> ");
+
+            String input = scanner.nextLine().trim();
+
+            if (input.equalsIgnoreCase("PRESS BUTTON")) {
+                System.out.println("\n<<< BUTTON PRESSED >>>");
+                System.out.println("---------------------------------------------------------");
+                System.out.println("The Subgiant Phase has begun. Mission accomplished.");
+                buttonPressed = true; // Exit the loop
+            } else if (input.equalsIgnoreCase("EXIT")) {
+                // Allow the player to quit gracefully even here
+                System.out.println("\nFinal action aborted. System remaining in breached state.");
+                buttonPressed = true;
+            } else {
+                System.out.println("\n[ERROR] Invalid command. Only 'PRESS BUTTON' will trigger the sequence.");
+            }
+        }
+        
+        // The pause method is now called right before closing
+        pressEnterToContinue(); 
         scanner.close();
+    }
+
+    private void pressEnterToContinue() {
+        System.out.print("Press ENTER to continue...");
+        scanner.nextLine();
     }
 
     public static void main(String[] args) {
