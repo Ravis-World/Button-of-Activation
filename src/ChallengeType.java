@@ -1,15 +1,22 @@
-package src;
-
 /**
- * Defines the different types of interactive challenges for the alarm deactivation.
+ * ChallengeType.java
+ * Enumerates the different types of security challenges the player must complete.
+ * This determines the logic for generating the puzzle and checking the input.
  */
 public enum ChallengeType {
-    // A command requiring a specific sequence of numbers (e.g., 1,3,2,4,2,3)
+    
+    /** Requires combining a command verb, short name, and number (e.g., crack port ssh 22). */
+    PORT_CRACK,
+    
+    /** Requires inputting a secret code word associated with a displayed pattern (e.g., ALPHA). */
     SEQUENCE_INPUT,
-
-    // A command requiring a specific word or code to be typed (e.g., 'override')
+    
+    /** Requires typing a specific, visible code word (e.g., OVERRIDE). */
     CODE_INPUT,
-
-    // A command requiring specific syntax (e.g., 'crack port ftp 21')
-    PORT_CRACK
+    
+    /** Requires typing a file path and name to delete (e.g., delete /temp/log.tmp). */
+    FILE_DELETE, // NEW CHALLENGE TYPE
+    
+    /** Requires typing the correct numerical answer to a simple math problem. */
+    MATH_CRACK // NEW CHALLENGE TYPE
 }

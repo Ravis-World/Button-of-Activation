@@ -1,5 +1,3 @@
-package src;
-
 /**
  * Represents a single step in the 50-step alarm deactivation.
  */
