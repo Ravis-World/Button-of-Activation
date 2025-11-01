@@ -16,7 +16,7 @@ public class ButtonOfActivationGame {
 
     // --- Code Mapping for Sequence Input ---
     // Rule: Length 5 = ALPHA, Length 6 = BETA, Length 7 = GAMMA
-    private static final String[] SEQUENCE_CODES = {"ALPHA", "BETA", "GAMMA", "DELTA", "OMEGA"}; 
+    private static final String[] SEQUENCE_CODES = {"ALPHA", "BETA", "GAMMA", "DELTA", "EPSILON"}; 
     
     // --- Game State ---
     private int stepsRemaining = TOTAL_STEPS;
@@ -225,7 +225,7 @@ public class ButtonOfActivationGame {
         System.out.println("OBJECTIVE: Complete 50 steps to breach the system and activate the Subgiant Phase.");
         System.out.println("Type 'EXIT' to quit at any time.");
         // Display the crucial hint for sequence challenges
-        System.out.println("HINT: Deactivation Codes are mapped by pattern length: 5=ALPHA, 6=BETA, 7=GAMMA.");
+        System.out.println("HINT: Deactivation Codes are mapped by pattern length: 5=ALPHA, 6=BETA, 7=GAMMA, 8=DELTA, 9=EPSILON.");
         System.out.println("\n... Initialising Alarm Sequence ...\n");
         
         while (stepsRemaining > 0) {
