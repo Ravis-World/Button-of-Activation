@@ -1,6 +1,10 @@
 # Compiled class file
 *.class
 
+# Compiled executable and config
+*.exe
+*.xml
+
 # Recompile script
 *.bat
 
