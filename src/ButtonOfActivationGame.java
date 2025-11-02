@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -316,7 +317,19 @@ public class ButtonOfActivationGame {
     }
 
     public static void main(String[] args) {
-        ButtonOfActivationGame game = new ButtonOfActivationGame();
-        game.startGame();
+        // *** CODE ADDED TO SET CONSOLE TITLE ON WINDOWS ***
+        try {
+            // Execute the Windows 'title' command using cmd.exe
+            // The /c flag tells cmd to carry out the command and then terminate
+            new ProcessBuilder("cmd", "/c", "title Button of Activation").start();
+        } catch (IOException e) {
+            // This block handles potential errors (e.g., if running on a non-Windows OS
+            // where 'cmd' is not found, or if permissions are insufficient).
+            // We just print the error and let the game continue.
+            System.err.println("Could not set console title: " + e.getMessage());
+        }
+        
+        // Start the game instance
+        new ButtonOfActivationGame();
     }
 }
