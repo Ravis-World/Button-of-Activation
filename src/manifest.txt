@@ -1,1 +1,2 @@
 Main-Class: ButtonOfActivationGame
+Manifest-Version: 1.0

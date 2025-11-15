@@ -329,7 +329,8 @@ public class ButtonOfActivationGame {
             System.err.println("Could not set console title: " + e.getMessage());
         }
         
-        // Start the game instance
-        new ButtonOfActivationGame();
+        // Start the game instance and run the game loop
+        ButtonOfActivationGame game = new ButtonOfActivationGame();
+        game.startGame();
     }
 }
