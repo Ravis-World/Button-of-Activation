@@ -223,7 +223,7 @@ public class ButtonOfActivationGame {
         System.out.println("---------------------------------------------------------");
         System.out.println("  WELCOME, HENCHMAN Qess. Omega, TO THE BUTTON OF ACTIVATION");
         System.out.println("---------------------------------------------------------");
-        System.out.println("OBJECTIVE: Complete 50 steps to breach the system and activate the Sun's Subgiant Phase.");
+        System.out.println("OBJECTIVE: Complete " + TOTAL_STEPS + " steps to breach the system and activate the Sun's Subgiant Phase.");
         System.out.println("Type 'EXIT' to quit at any time.");
         // Display the crucial hint for sequence challenges
         System.out.println("HINT: Deactivation Codes are mapped by pattern length: 5=ALPHA, 6=BETA, 7=GAMMA, 8=DELTA, 9=EPSILON.");
