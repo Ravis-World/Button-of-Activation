@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ButtonOfActivationGame {
 
     // --- Configuration ---
-    private static final int TOTAL_STEPS = 50; 
+    private static final int TOTAL_STEPS = 20; 
     private static final int RANDOM_CHALLENGES = TOTAL_STEPS - 1; 
 
     // --- Code Mapping for Sequence Input ---
