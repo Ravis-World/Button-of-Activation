@@ -10,7 +10,7 @@ Each stage presents a randomly generated challenge—from cracking security port
 
 ### Key Features
 
-*   **Procedural Challenges:** Each playthrough features a unique sequence of challenges..
+*   **Procedural Challenges:** Each playthrough features a unique sequence of challenges.
     
 *   **Command Line Interface:** A classic, immersive terminal experience.
     
