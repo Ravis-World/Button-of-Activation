@@ -6,7 +6,7 @@ What is the Button of Activation?
 
 The **Button of Activation** is a command-line text adventure built in Java. You are Henchman Qess. Omega, tasked with repeatedly challenging a compromised security console using cryptic commands to complete the **Breach Protocol**​, a protocol that turns the Sun into a Red Giant.
 
-Each stage presents a randomly generated challenge—from cracking security ports and cracking math problems to manipulating file systems—all while racing against the clock. Can you break the console before it manages to stabilize?
+Each stage presents a randomly generated challenge—from cracking security ports and cracking math problems to manipulating file systems—all while racing against the clock. Can you break the console before it manages to stabilise?
 
 ### Key Features
 
