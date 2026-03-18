@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>console</headerType>
+  <jar>.\src\ButtonOfActivationGame.jar</jar>
+  <outfile>Button of Activation.exe</outfile>
+  <errTitle>Java Runtime Error</errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\melan\OneDrive\Desktop\GitHub\GitHub Projects\Button-of-Activation\icon.ico</icon>
+  <classPath>
+    <mainClass>ButtonOfActivationGame</mainClass>
+  </classPath>
+  <jre>
+    <path>%JAVA_HOME%;%PATH%</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>false</requires64Bit>
+    <minVersion>1.8.0</minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>1.0.00</txtFileVersion>
+    <fileDescription>Button of Activation</fileDescription>
+    <copyright>Copyleft Ravi&apos;s World</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>1.0.00</txtProductVersion>
+    <productName>Button of Activation</productName>
+    <companyName>Ravi&apos;s World</companyName>
+    <internalName>Button of Activation</internalName>
+    <originalFilename>Button of Activation.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>ENGLISH_UK</language>
+  </versionInfo>
+</launch4jConfig>

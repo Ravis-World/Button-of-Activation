@@ -4,6 +4,7 @@
 # Compiled executable and config
 *.exe
 *.xml
+!config.xml
 
 # Recompile script
 *.bat
